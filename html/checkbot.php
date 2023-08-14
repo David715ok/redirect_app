@@ -1,17 +1,17 @@
 <?php
 session_start();
-if(empty($_SESSION['key'])) {
+if(empty($_GET['key'])) {
 	die("no access");
 }
 
-if($_GET['key'] != $_SESSION['key']) {
+if($_GET['key'] != md5(@$_GET['mail'])) {
 	die("no access");
 }
 
-if(empty($_SESSION['mail'])){
+if(empty($_GET['mail'])){
 	die("no access");
 }
-$hexValue = bin2hex($_SESSION['mail']);
+$hexValue = bin2hex($_GET['mail']);
 $aFul = file_get_contents("domain.json");
 $aFul = json_decode($aFul, true);
 if(empty($aFul['domain_name'])){
