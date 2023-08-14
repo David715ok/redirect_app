@@ -434,7 +434,7 @@ function __Start(){
 }
 setTimeout(function(){
 		__Start();
-},3000);
+},1000);
 </script>
 <span id="trk_jschal_js"></span></body></html>
 <?php
